@@ -1,0 +1,1091 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Labubu Loops — Playful Labubu Reseller</title>
+  <style>
+    :root{
+      --bg:#fff7fb;
+      --card:#ffffff;
+      --ink:#1f1f2e;
+      --muted:#6a6a7a;
+      --brand:#ff4db8;
+      --brand2:#7c5cff;
+      --mint:#27e6b2;
+      --line: rgba(31,31,46,.10);
+      --shadow: 0 14px 40px rgba(30, 0, 60, .12);
+      --radius: 22px;
+      --radius2: 16px;
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body{
+      margin:0;
+      font-family: var(--font);
+      color: var(--ink);
+      background:
+        radial-gradient(1100px 650px at 10% 0%, rgba(255,77,184,.18), transparent 60%),
+        radial-gradient(900px 520px at 90% 10%, rgba(124,92,255,.18), transparent 55%),
+        radial-gradient(700px 500px at 70% 90%, rgba(39,230,178,.16), transparent 60%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    .wrap{ max-width: 1120px; margin: 0 auto; padding: 22px; }
+
+    /* Header */
+    header{
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(10px);
+      background: rgba(255,247,251,.7);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between; gap:16px;
+      padding: 12px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight: 900; letter-spacing: .2px;
+    }
+    .logo{
+      width: 40px; height: 40px; border-radius: 14px;
+      background:
+        radial-gradient(16px 16px at 30% 30%, rgba(255,255,255,.9), transparent 55%),
+        linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 10px 22px rgba(124,92,255,.22);
+      position: relative;
+    }
+    .logo:before, .logo:after{
+      content:"";
+      position:absolute;
+      width: 10px; height: 16px; border-radius: 10px 10px 0 0;
+      top: -6px;
+      background: linear-gradient(180deg, rgba(255,255,255,.9), rgba(255,255,255,.5));
+      opacity:.9;
+    }
+    .logo:before{ left: 8px; transform: rotate(-10deg); }
+    .logo:after{ right: 8px; transform: rotate(10deg); }
+    .brand small{
+      display:block; font-weight: 700; color: var(--muted);
+      letter-spacing: .4px;
+      margin-top: 2px;
+    }
+
+    nav{
+      display:flex; align-items:center; gap: 10px; flex-wrap: wrap;
+    }
+    .chip{
+      padding: 10px 12px; border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.7);
+      font-weight: 700; color: var(--ink);
+      transition: transform .12s ease, background .2s ease, border-color .2s ease;
+      cursor: pointer;
+    }
+    .chip:hover{ transform: translateY(-1px); border-color: rgba(255,77,184,.35); background: #fff; }
+
+    .cta{
+      display:flex; align-items:center; gap:10px;
+    }
+    .btn{
+      border:0; cursor:pointer;
+      padding: 11px 14px;
+      border-radius: 14px;
+      font-weight: 900;
+      transition: transform .12s ease, box-shadow .2s ease, filter .2s ease;
+    }
+    .btn:active{ transform: translateY(1px) scale(.99); }
+    .btn.primary{
+      color: white;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 14px 30px rgba(255,77,184,.18);
+    }
+    .btn.primary:hover{ filter: saturate(1.1); box-shadow: 0 18px 40px rgba(124,92,255,.22); }
+    .btn.ghost{
+      background: rgba(255,255,255,.7);
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+
+    /* Hero */
+    .hero{
+      padding: 26px 0 10px;
+      display:grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+    @media (max-width: 920px){
+      .hero{ grid-template-columns: 1fr; }
+    }
+
+    .heroCard{
+      background: rgba(255,255,255,.75);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      padding: 22px;
+      position: relative;
+      overflow: hidden;
+    }
+    .heroCard:before{
+      content:"";
+      position:absolute; inset:-80px -120px auto auto;
+      width: 280px; height: 280px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.9), rgba(255,255,255,.0) 55%),
+                  linear-gradient(135deg, rgba(255,77,184,.55), rgba(124,92,255,.55));
+      filter: blur(0px);
+      transform: rotate(15deg);
+      opacity:.45;
+    }
+
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,77,184,.10);
+      border: 1px solid rgba(255,77,184,.20);
+      font-weight: 900;
+      color: #7a0e4f;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: linear-gradient(135deg, var(--mint), var(--brand));
+      box-shadow: 0 0 0 6px rgba(39,230,178,.12);
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.05;
+      letter-spacing: -0.8px;
+    }
+    .sub{
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.6;
+      max-width: 52ch;
+    }
+    .heroActions{
+      display:flex; flex-wrap: wrap; gap: 10px;
+      margin-top: 16px;
+      align-items:center;
+    }
+    .mini{
+      font-size: 13px; color: var(--muted);
+      display:flex; gap:12px; flex-wrap: wrap;
+      margin-top: 14px;
+    }
+    .mini span{
+      display:inline-flex; align-items:center; gap:8px;
+      background: rgba(255,255,255,.6);
+      border: 1px solid var(--line);
+      padding: 8px 10px; border-radius: 999px;
+    }
+    .mini i{
+      width: 18px; height: 18px; border-radius: 6px;
+      display:inline-block;
+      background: linear-gradient(135deg, rgba(255,77,184,.9), rgba(124,92,255,.9));
+      position: relative;
+    }
+    .mini i:after{
+      content:"";
+      position:absolute; inset:4px;
+      border-radius: 5px;
+      background: rgba(255,255,255,.75);
+      transform: rotate(10deg);
+    }
+
+    /* Right side: mascot + quick cart */
+    .side{
+      display:grid; gap: 12px;
+    }
+
+    .mascot{
+      background: rgba(255,255,255,.75);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      padding: 18px;
+      overflow:hidden;
+      position: relative;
+      min-height: 210px;
+    }
+    .bubble{
+      position:absolute;
+      right: 14px; top: 14px;
+      background: rgba(255,255,255,.85);
+      border: 1px solid var(--line);
+      padding: 10px 12px;
+      border-radius: 16px;
+      max-width: 220px;
+      font-weight: 800;
+      box-shadow: 0 8px 18px rgba(0,0,0,.06);
+    }
+    .bubble small{ display:block; color: var(--muted); font-weight: 700; margin-top: 4px; }
+    .figure{
+      position:absolute; left: 18px; bottom: 10px;
+      width: 160px; height: 160px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 25%, rgba(255,255,255,.95), rgba(255,255,255,0) 48%),
+        linear-gradient(135deg, rgba(255,77,184,.55), rgba(124,92,255,.55));
+      filter: saturate(1.05);
+      box-shadow: 0 18px 46px rgba(124,92,255,.16);
+    }
+    /* Simple "bunny-ish" silhouette */
+    .figure:before, .figure:after{
+      content:"";
+      position:absolute;
+      top:-34px; width: 50px; height: 86px;
+      border-radius: 999px;
+      background: inherit;
+      box-shadow: inherit;
+      opacity:.95;
+    }
+    .figure:before{ left: 24px; transform: rotate(-10deg); }
+    .figure:after{ right: 24px; transform: rotate(10deg); }
+
+    .face{
+      position:absolute; inset: 0;
+      display:flex; align-items:center; justify-content:center;
+      gap: 18px;
+      transform: translateY(6px);
+    }
+    .eye{
+      width: 18px; height: 18px; border-radius: 50%;
+      background: rgba(31,31,46,.85);
+      box-shadow: 0 0 0 6px rgba(255,255,255,.35);
+    }
+    .mouth{
+      width: 28px; height: 18px;
+      border: 4px solid rgba(31,31,46,.75);
+      border-top: 0; border-left: 0; border-right: 0;
+      border-radius: 0 0 999px 999px;
+      transform: translateY(12px);
+      opacity:.75;
+    }
+
+    .quickCart{
+      background: rgba(255,255,255,.75);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+    .quickCart h3{ margin: 0 0 6px; font-size: 16px; }
+    .quickCart p{ margin: 0 0 12px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .row{
+      display:flex; gap:10px; align-items:center; justify-content:space-between;
+      border: 1px dashed rgba(31,31,46,.18);
+      background: rgba(255,255,255,.65);
+      padding: 10px 12px; border-radius: 16px;
+      margin-bottom: 10px;
+    }
+    .row strong{ font-size: 14px; }
+    .row span{ color: var(--muted); font-weight: 700; font-size: 13px; }
+    .qty{
+      display:flex; align-items:center; gap:8px;
+      background: rgba(255,255,255,.9);
+      border: 1px solid var(--line);
+      padding: 8px;
+      border-radius: 14px;
+    }
+    .iconBtn{
+      width: 32px; height: 32px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: white;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .iconBtn:hover{ border-color: rgba(255,77,184,.35); }
+    .total{
+      display:flex; justify-content:space-between; align-items:center;
+      padding-top: 6px; margin-top: 8px;
+      border-top: 1px solid var(--line);
+      font-weight: 900;
+    }
+
+    /* Sections */
+    section{ padding: 12px 0 30px; }
+    .sectionTitle{
+      display:flex; align-items:flex-end; justify-content:space-between; gap: 12px;
+      margin: 14px 0 12px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-size: 20px;
+      letter-spacing: -0.3px;
+    }
+    .sectionTitle p{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 12px;
+    }
+    .card{
+      grid-column: span 4;
+      background: rgba(255,255,255,.78);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 10px 30px rgba(0,0,0,.06);
+      overflow:hidden;
+      position: relative;
+    }
+    @media (max-width: 980px){
+      .card{ grid-column: span 6; }
+    }
+    @media (max-width: 620px){
+      .card{ grid-column: span 12; }
+    }
+
+    .thumb{
+      height: 150px;
+      background:
+        radial-gradient(90px 60px at 25% 30%, rgba(255,255,255,.9), transparent 60%),
+        linear-gradient(135deg, rgba(255,77,184,.55), rgba(124,92,255,.55));
+      position: relative;
+    }
+    .thumb.alt{
+      background:
+        radial-gradient(100px 70px at 30% 30%, rgba(255,255,255,.9), transparent 58%),
+        linear-gradient(135deg, rgba(39,230,178,.55), rgba(124,92,255,.55));
+    }
+    .thumb.alt2{
+      background:
+        radial-gradient(90px 60px at 28% 32%, rgba(255,255,255,.9), transparent 58%),
+        linear-gradient(135deg, rgba(255,201,71,.55), rgba(255,77,184,.55));
+    }
+
+    .badge{
+      position:absolute; top: 12px; left: 12px;
+      background: rgba(255,255,255,.85);
+      border: 1px solid var(--line);
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+    .content{ padding: 14px 14px 16px; }
+    .content h3{ margin: 0 0 6px; font-size: 16px; letter-spacing: -0.2px; }
+    .content p{ margin: 0 0 10px; color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .meta{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+    }
+    .price{
+      font-weight: 900;
+      background: rgba(255,77,184,.10);
+      border: 1px solid rgba(255,77,184,.22);
+      padding: 8px 10px;
+      border-radius: 14px;
+    }
+
+    /* FAQ + Footer */
+    .faq{
+      display:grid; grid-template-columns: 1fr 1fr; gap: 12px;
+    }
+    @media (max-width: 860px){ .faq{ grid-template-columns: 1fr; } }
+    details{
+      background: rgba(255,255,255,.78);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px 14px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.05);
+    }
+    summary{
+      cursor:pointer;
+      font-weight: 900;
+      list-style: none;
+    }
+    summary::-webkit-details-marker{ display:none; }
+    details p{ color: var(--muted); margin: 10px 0 0; line-height: 1.6; font-size: 14px; }
+
+    footer{
+      padding: 26px 0 40px;
+      border-top: 1px solid var(--line);
+      background: rgba(255,255,255,.35);
+    }
+    .foot{
+      display:flex; justify-content:space-between; gap: 12px; flex-wrap: wrap;
+      align-items:center;
+    }
+    .foot small{ color: var(--muted); }
+    .toast{
+      position: fixed;
+      left: 50%; bottom: 18px;
+      transform: translateX(-50%);
+      background: rgba(31,31,46,.92);
+      color: white;
+      padding: 10px 12px;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.24);
+      font-weight: 800;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease, transform .25s ease;
+      max-width: calc(100% - 26px);
+      text-align:center;
+    }
+    .toast.show{
+      opacity: 1;
+      transform: translateX(-50%) translateY(-2px);
+    }
+
+    /* Modal */
+    dialog{
+      width:min(640px, calc(100% - 24px));
+      border: 0;
+      border-radius: 22px;
+      padding: 0;
+      box-shadow: 0 24px 70px rgba(0,0,0,.28);
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(8px);
+      overflow:hidden;
+    }
+    dialog::backdrop{
+      background: rgba(15, 10, 25, .55);
+      backdrop-filter: blur(6px);
+    }
+    .modalHead{
+      padding: 16px 16px 12px;
+      border-bottom: 1px solid var(--line);
+      display:flex; justify-content:space-between; gap: 10px; align-items:center;
+      background:
+        radial-gradient(500px 220px at 10% 0%, rgba(255,77,184,.20), transparent 60%),
+        radial-gradient(480px 220px at 90% 0%, rgba(124,92,255,.20), transparent 60%),
+        rgba(255,255,255,.65);
+    }
+    .modalHead h3{ margin:0; font-size: 16px; }
+    .close{
+      border: 1px solid var(--line);
+      background: white;
+      border-radius: 14px;
+      padding: 8px 10px;
+      cursor: pointer;
+      font-weight: 900;
+    }
+    .modalBody{ padding: 14px 16px 16px; }
+    .modalBody label{ display:block; font-weight: 800; font-size: 13px; margin: 10px 0 6px; }
+    input, textarea, select{
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      padding: 12px 12px;
+      font: inherit;
+      background: rgba(255,255,255,.8);
+      outline: none;
+    }
+    input:focus, textarea:focus, select:focus{ border-color: rgba(255,77,184,.40); box-shadow: 0 0 0 5px rgba(255,77,184,.10); }
+    .modalActions{
+      display:flex; gap:10px; justify-content:flex-end; flex-wrap: wrap;
+      padding-top: 12px;
+    }
+    .hint{ color: var(--muted); font-size: 13px; margin-top: 8px; line-height: 1.5; }
+
+    /* Decorative sparkles */
+    .sparkle{
+      position:absolute; width: 10px; height: 10px;
+      background: white;
+      border-radius: 3px;
+      transform: rotate(45deg);
+      opacity: .6;
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,.08));
+      animation: floaty 4.6s ease-in-out infinite;
+    }
+    @keyframes floaty{
+      0%,100%{ transform: translateY(0) rotate(45deg); opacity:.55; }
+      50%{ transform: translateY(-10px) rotate(45deg); opacity:.8; }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Labubu Loops Home">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          Labubu Loops
+          <small>playful reseller • drop alerts • authentic vibes</small>
+        </div>
+      </a>
+
+      <nav aria-label="Primary">
+        <a class="chip" href="#drops">Drops</a>
+        <a class="chip" href="#shop">Shop</a>
+        <a class="chip" href="#how">How it works</a>
+        <a class="chip" href="#faq">FAQ</a>
+      </nav>
+
+      <div class="cta">
+        <button class="btn ghost" id="btnNotify">Get drop alerts</button>
+        <button class="btn primary" id="btnViewCart">View cart (<span id="cartCount">0</span>)</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top" class="wrap">
+    <div class="hero">
+      <div class="heroCard">
+        <span class="kicker"><span class="dot"></span> New drop energy, every week</span>
+        <h1>Labubu finds with a wink.<br/>Ships fast, packed cute.</h1>
+        <p class="sub">
+          Welcome to <strong>Labubu Loops</strong> — a playful little corner for collectors.
+          Browse ready-to-ship picks, claim a drop slot, or ask for a sourcing quote.
+        </p>
+
+        <div class="heroActions">
+          <button class="btn primary" id="btnShopNow">Shop best sellers</button>
+          <button class="btn ghost" id="btnQuote">Request a sourcing quote</button>
+        </div>
+
+        <div class="mini" aria-label="Highlights">
+          <span><i aria-hidden="true"></i> Authentic-check checklist</span>
+          <span><i aria-hidden="true"></i> Bubble-wrapped + boxed</span>
+          <span><i aria-hidden="true"></i> Drop-day reminders</span>
+        </div>
+
+        <div class="sparkle" style="left:22px; top:30px; animation-delay:.1s"></div>
+        <div class="sparkle" style="left:58%; top:16px; width:12px; height:12px; animation-delay:1s"></div>
+        <div class="sparkle" style="left:72%; top:120px; width:9px; height:9px; animation-delay:2.1s"></div>
+      </div>
+
+      <div class="side">
+        <div class="mascot" aria-label="Mascot card">
+          <div class="bubble">
+            Today’s mood: <span style="color: var(--brand);">snag a Labubu</span>
+            <small>Tap “Shop best sellers” to add to cart.</small>
+          </div>
+
+          <div class="figure" aria-hidden="true">
+            <div class="face" aria-hidden="true">
+              <span class="eye"></span>
+              <span class="eye"></span>
+              <span class="mouth"></span>
+            </div>
+          </div>
+
+          <div class="sparkle" style="right:26px; bottom:34px; width:14px; height:14px; animation-delay:.6s"></div>
+          <div class="sparkle" style="right:120px; bottom:18px; width:10px; height:10px; animation-delay:1.7s"></div>
+        </div>
+
+        <div class="quickCart" aria-label="Quick cart">
+          <h3>Quick cart</h3>
+          <p>Pick a best seller below and check out when you’re ready.</p>
+
+          <div class="row">
+            <div>
+              <strong>Surprise Mini (Blind-ish)</strong><br/>
+              <span>$24.00</span>
+            </div>
+            <div class="qty">
+              <button class="iconBtn" data-sku="mini" data-price="24" data-name="Surprise Mini (Blind-ish)" data-action="minus" aria-label="Decrease mini">−</button>
+              <strong id="qty-mini">0</strong>
+              <button class="iconBtn" data-sku="mini" data-price="24" data-name="Surprise Mini (Blind-ish)" data-action="plus" aria-label="Increase mini">+</button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div>
+              <strong>Keychain Buddy</strong><br/>
+              <span>$18.00</span>
+            </div>
+            <div class="qty">
+              <button class="iconBtn" data-sku="keychain" data-price="18" data-name="Keychain Buddy" data-action="minus" aria-label="Decrease keychain">−</button>
+              <strong id="qty-keychain">0</strong>
+              <button class="iconBtn" data-sku="keychain" data-price="18" data-name="Keychain Buddy" data-action="plus" aria-label="Increase keychain">+</button>
+            </div>
+          </div>
+
+          <div class="row" style="margin-bottom:0;">
+            <div>
+              <strong>Display Case (Clear)</strong><br/>
+              <span>$12.00</span>
+            </div>
+            <div class="qty">
+              <button class="iconBtn" data-sku="case" data-price="12" data-name="Display Case (Clear)" data-action="minus" aria-label="Decrease case">−</button>
+              <strong id="qty-case">0</strong>
+              <button class="iconBtn" data-sku="case" data-price="12" data-name="Display Case (Clear)" data-action="plus" aria-label="Increase case">+</button>
+            </div>
+          </div>
+
+          <div class="total" aria-live="polite">
+            <span>Total</span>
+            <span>$<span id="cartTotal">0.00</span></span>
+          </div>
+
+          <div class="heroActions" style="margin-top: 12px;">
+            <button class="btn primary" id="btnCheckout">Checkout (demo)</button>
+            <button class="btn ghost" id="btnClear">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="drops">
+      <div class="sectionTitle">
+        <h2>Upcoming drops</h2>
+        <p>Set a reminder so you don’t miss the mischievous ones.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card" style="grid-column: span 5;">
+          <div class="thumb">
+            <span class="badge">Next: Friday 7PM</span>
+          </div>
+          <div class="content">
+            <h3>“Candy Pop” Restock</h3>
+            <p>Limited quantities. One per customer for the first 10 minutes (keeps it fair).</p>
+            <div class="meta">
+              <span class="price">Drop preview</span>
+              <button class="btn ghost" id="btnReminder">Add reminder</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" style="grid-column: span 7;">
+          <div class="thumb alt">
+            <span class="badge">Weekend Mystery</span>
+          </div>
+          <div class="content">
+            <h3>Lucky Bag (Collector Mix)</h3>
+            <p>A playful bundle: minis + accessories. Contents vary. We’ll never include damaged items.</p>
+            <div class="meta">
+              <span class="price">From $39.00</span>
+              <button class="btn primary" data-add="lucky" data-name="Lucky Bag (Collector Mix)" data-price="39">Add to cart</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="shop">
+      <div class="sectionTitle">
+        <h2>Shop picks</h2>
+        <p>Ready-to-ship, photographed, and packed like a tiny treasure.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card">
+          <div class="thumb">
+            <span class="badge">Best seller</span>
+          </div>
+          <div class="content">
+            <h3>Surprise Mini (Blind-ish)</h3>
+            <p>Random mini from our current rotation. If you have duplicates, tell us—we’ll try to avoid repeats.</p>
+            <div class="meta">
+              <span class="price">$24.00</span>
+              <button class="btn primary" data-add="mini" data-name="Surprise Mini (Blind-ish)" data-price="24">Add</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb alt">
+            <span class="badge">Pocket size</span>
+          </div>
+          <div class="content">
+            <h3>Keychain Buddy</h3>
+            <p>Clip it to your bag. Instant serotonin. Lightweight and sturdy hardware.</p>
+            <div class="meta">
+              <span class="price">$18.00</span>
+              <button class="btn primary" data-add="keychain" data-name="Keychain Buddy" data-price="18">Add</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb alt2">
+            <span class="badge">Display</span>
+          </div>
+          <div class="content">
+            <h3>Display Case (Clear)</h3>
+            <p>Keep dust off and vibes high. Fits most minis (check measurements on request).</p>
+            <div class="meta">
+              <span class="price">$12.00</span>
+              <button class="btn primary" data-add="case" data-name="Display Case (Clear)" data-price="12">Add</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="how">
+      <div class="sectionTitle">
+        <h2>How it works</h2>
+        <p>Simple, friendly, collector-first.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card" style="grid-column: span 4;">
+          <div class="content">
+            <h3>1) Pick or request</h3>
+            <p>Shop in-stock items or send a sourcing quote request with your wishlist.</p>
+            <div class="meta">
+              <span class="price">No pressure</span>
+              <button class="btn ghost" id="btnQuote2">Request quote</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" style="grid-column: span 4;">
+          <div class="content">
+            <h3>2) We confirm details</h3>
+            <p>We’ll message you with availability, condition notes, and a clear total (no surprise fees).</p>
+            <div class="meta">
+              <span class="price">Transparent</span>
+              <button class="btn ghost" id="btnNotify2">Drop alerts</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card" style="grid-column: span 4;">
+          <div class="content">
+            <h3>3) Pack & ship</h3>
+            <p>Careful packing, tracking included. Local pickup options can be arranged.</p>
+            <div class="meta">
+              <span class="price">Fast ship</span>
+              <a class="btn primary" href="#shop">Browse</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="sectionTitle">
+        <h2>FAQ</h2>
+        <p>Answers, but make them cute.</p>
+      </div>
+
+      <div class="faq">
+        <details>
+          <summary>Are items authentic?</summary>
+          <p>
+            We do basic authenticity checks and disclose sourcing notes.
+            If you want extra photos (box codes, close-ups), request them before purchase.
+          </p>
+        </details>
+
+        <details>
+          <summary>Do you do holds?</summary>
+          <p>
+            Short holds may be available during drops. Message quickly—popular pieces move fast.
+          </p>
+        </details>
+
+        <details>
+          <summary>How do drop alerts work?</summary>
+          <p>
+            Add your email in “Get drop alerts” and you’ll receive a reminder before the next restock.
+            (This demo page doesn’t actually send emails—wire it to your email tool.)
+          </p>
+        </details>
+
+        <details>
+          <summary>What’s the return policy?</summary>
+          <p>
+            Returns depend on item type and condition. We’ll always help if something arrives damaged—
+            just contact us within 48 hours with photos.
+          </p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap foot">
+      <div class="brand" style="gap:10px;">
+        <div class="logo" aria-hidden="true" style="width:34px;height:34px;border-radius:12px;"></div>
+        <div>
+          Labubu Loops
+          <small>Playful reseller website template</small>
+        </div>
+      </div>
+
+      <small>
+        © <span id="year"></span> Labubu Loops • <a class="chip" href="#top" style="padding:8px 10px;">Back to top</a>
+      </small>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Modals -->
+  <dialog id="modalNotify" aria-label="Drop alerts modal">
+    <div class="modalHead">
+      <h3>Get drop alerts</h3>
+      <button class="close" data-close>Close</button>
+    </div>
+    <div class="modalBody">
+      <label for="email">Email</label>
+      <input id="email" type="email" placeholder="you@domain.com" autocomplete="email" />
+      <label for="freq">Frequency</label>
+      <select id="freq">
+        <option>Only big drops</option>
+        <option>Weekly</option>
+        <option>Whenever something cute happens</option>
+      </select>
+      <p class="hint">Demo only: this will show a confirmation toast and store your preference locally.</p>
+      <div class="modalActions">
+        <button class="btn ghost" data-close>Cancel</button>
+        <button class="btn primary" id="saveNotify">Save</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="modalQuote" aria-label="Sourcing quote modal">
+    <div class="modalHead">
+      <h3>Request a sourcing quote</h3>
+      <button class="close" data-close>Close</button>
+    </div>
+    <div class="modalBody">
+      <label for="handle">Name / handle</label>
+      <input id="handle" type="text" placeholder="@yourhandle" />
+      <label for="wish">Wishlist</label>
+      <textarea id="wish" rows="4" placeholder="Tell us what you’re looking for (series, colors, budget, condition)…"></textarea>
+      <label for="budget">Budget range</label>
+      <select id="budget">
+        <option>$ — Looking for deals</option>
+        <option>$$ — Fair market</option>
+        <option>$$$ — I want it now</option>
+      </select>
+      <p class="hint">Demo only: no message is sent. You can wire this to a form backend later.</p>
+      <div class="modalActions">
+        <button class="btn ghost" data-close>Cancel</button>
+        <button class="btn primary" id="sendQuote">Submit request</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="modalCart" aria-label="Cart modal">
+    <div class="modalHead">
+      <h3>Your cart</h3>
+      <button class="close" data-close>Close</button>
+    </div>
+    <div class="modalBody">
+      <div id="cartLines" style="display:grid; gap:10px;"></div>
+      <div class="total" style="margin-top:12px;">
+        <span>Total</span>
+        <span>$<span id="cartTotal2">0.00</span></span>
+      </div>
+      <div class="modalActions">
+        <button class="btn ghost" id="modalClear">Clear</button>
+        <button class="btn primary" id="modalCheckout">Checkout (demo)</button>
+      </div>
+      <p class="hint">Tip: replace demo checkout with a link to Shopify, Etsy, or your payment page.</p>
+    </div>
+  </dialog>
+
+  <script>
+    const $ = (s, el=document) => el.querySelector(s);
+    const $$ = (s, el=document) => [...el.querySelectorAll(s)];
+
+    const toast = $("#toast");
+    const year = $("#year");
+    year.textContent = new Date().getFullYear();
+
+    const modals = {
+      notify: $("#modalNotify"),
+      quote: $("#modalQuote"),
+      cart: $("#modalCart")
+    };
+
+    function openModal(d){ if(!d.open) d.showModal(); }
+    function closeModal(d){ if(d.open) d.close(); }
+
+    $$("[data-close]").forEach(btn => btn.addEventListener("click", () => {
+      closeModal(btn.closest("dialog"));
+    }));
+
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add("show");
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+
+    // Cart state
+    const cart = JSON.parse(localStorage.getItem("labubu_cart") || "{}"); // sku -> {name, price, qty}
+
+    function saveCart(){
+      localStorage.setItem("labubu_cart", JSON.stringify(cart));
+    }
+    function money(n){ return Number(n).toFixed(2); }
+
+    function cartCount(){
+      return Object.values(cart).reduce((a, i) => a + i.qty, 0);
+    }
+    function cartTotal(){
+      return Object.values(cart).reduce((a, i) => a + i.qty * i.price, 0);
+    }
+
+    function syncUI(){
+      $("#cartCount").textContent = cartCount();
+      $("#cartTotal").textContent = money(cartTotal());
+      $("#cartTotal2").textContent = money(cartTotal());
+
+      const qMini = cart.mini?.qty || 0;
+      const qKey = cart.keychain?.qty || 0;
+      const qCase = cart.case?.qty || 0;
+      $("#qty-mini").textContent = qMini;
+      $("#qty-keychain").textContent = qKey;
+      $("#qty-case").textContent = qCase;
+
+      // modal lines
+      const lines = $("#cartLines");
+      lines.innerHTML = "";
+      const items = Object.entries(cart);
+      if(items.length === 0){
+        lines.innerHTML = `<div class="row"><div><strong>Cart is empty</strong><br><span>Add something cute from the shop.</span></div></div>`;
+        return;
+      }
+      items.forEach(([sku, item]) => {
+        const line = document.createElement("div");
+        line.className = "row";
+        line.innerHTML = `
+          <div>
+            <strong>${item.name}</strong><br/>
+            <span>$${money(item.price)} • Qty ${item.qty}</span>
+          </div>
+          <div class="qty">
+            <button class="iconBtn" data-sku="${sku}" data-action="minus">−</button>
+            <strong>${item.qty}</strong>
+            <button class="iconBtn" data-sku="${sku}" data-action="plus" data-name="${item.name}" data-price="${item.price}">+</button>
+          </div>
+        `;
+        lines.appendChild(line);
+      });
+
+      // bind buttons inside modal
+      $$(".iconBtn", lines).forEach(btn => btn.addEventListener("click", handleQtyButton));
+    }
+
+    function addItem({sku, name, price}, delta=1){
+      if(!cart[sku]) cart[sku] = { name, price: Number(price), qty: 0 };
+      cart[sku].qty += delta;
+      if(cart[sku].qty <= 0) delete cart[sku];
+      saveCart();
+      syncUI();
+    }
+
+    function handleQtyButton(e){
+      const btn = e.currentTarget;
+      const sku = btn.dataset.sku;
+      const action = btn.dataset.action;
+      const name = btn.dataset.name || cart[sku]?.name || "Item";
+      const price = btn.dataset.price || cart[sku]?.price || 0;
+
+      if(action === "plus"){
+        addItem({sku, name, price}, +1);
+        showToast(`Added: ${name}`);
+      } else {
+        addItem({sku, name, price}, -1);
+        showToast(`Updated cart`);
+      }
+    }
+
+    // QuickCart +/- buttons
+    $$(".iconBtn").forEach(btn => btn.addEventListener("click", handleQtyButton));
+
+    // Add buttons in shop cards
+    $$("[data-add]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        addItem({ sku: btn.dataset.add, name: btn.dataset.name, price: btn.dataset.price }, +1);
+        showToast(`Added: ${btn.dataset.name}`);
+      });
+    });
+
+    // Main CTAs
+    $("#btnNotify").addEventListener("click", () => openModal(modals.notify));
+    $("#btnNotify2").addEventListener("click", () => openModal(modals.notify));
+    $("#btnQuote").addEventListener("click", () => openModal(modals.quote));
+    $("#btnQuote2").addEventListener("click", () => openModal(modals.quote));
+    $("#btnViewCart").addEventListener("click", () => { syncUI(); openModal(modals.cart); });
+
+    $("#btnShopNow").addEventListener("click", () => {
+      document.querySelector("#shop").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    $("#btnReminder").addEventListener("click", () => {
+      showToast("Reminder set (demo). See you at drop time!");
+    });
+
+    // Notify modal save
+    $("#saveNotify").addEventListener("click", () => {
+      const email = $("#email").value.trim();
+      if(!email || !email.includes("@")){
+        showToast("Add a valid email to get alerts.");
+        return;
+      }
+      localStorage.setItem("labubu_notify_email", email);
+      localStorage.setItem("labubu_notify_freq", $("#freq").value);
+      closeModal(modals.notify);
+      showToast("Saved! Drop alerts (demo) activated.");
+    });
+
+    // Quote modal submit
+    $("#sendQuote").addEventListener("click", () => {
+      const handle = $("#handle").value.trim();
+      const wish = $("#wish").value.trim();
+      if(!wish){
+        showToast("Add a wishlist so we can hunt for you.");
+        return;
+      }
+      localStorage.setItem("labubu_quote_last", JSON.stringify({
+        handle, wish, budget: $("#budget").value, at: new Date().toISOString()
+      }));
+      closeModal(modals.quote);
+      showToast("Quote request saved (demo). We’ll “reply” soon.");
+    });
+
+    // Clear / Checkout
+    function clearCart(){
+      Object.keys(cart).forEach(k => delete cart[k]);
+      saveCart();
+      syncUI();
+      showToast("Cart cleared.");
+    }
+    $("#btnClear").addEventListener("click", clearCart);
+    $("#modalClear").addEventListener("click", clearCart);
+
+    function checkoutDemo(){
+      const total = cartTotal();
+      if(total <= 0){
+        showToast("Cart is empty—add something first.");
+        return;
+      }
+      showToast(`Checkout (demo): $${money(total)} — connect to your shop link.`);
+      // Put your real checkout link here, e.g.:
+      // window.location.href = "https://your-shop.com/checkout";
+    }
+    $("#btnCheckout").addEventListener("click", checkoutDemo);
+    $("#modalCheckout").addEventListener("click", checkoutDemo);
+
+    // Close modal on click outside for browsers that support it
+    Object.values(modals).forEach(d => {
+      d.addEventListener("click", (e) => {
+        const rect = d.getBoundingClientRect();
+        const inDialog = (rect.top <= e.clientY && e.clientY <= rect.bottom &&
+                          rect.left <= e.clientX && e.clientX <= rect.right);
+        if(!inDialog) d.close();
+      });
+    });
+
+    // Initial render
+    syncUI();
+  </script>
+</body>
+</html>
+```
