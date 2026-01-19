@@ -1,0 +1,718 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Alex Chen — AI Automation Developer</title>
+  <meta name="description" content="Professional portfolio for an AI developer specializing in automation: LLM agents, workflow orchestration, RPA, and production AI systems." />
+  <style>
+    :root{
+      --bg:#0b1020;
+      --panel:#0f1730;
+      --text:#e7ecff;
+      --muted:#a8b3d6;
+      --brand:#7c5cff;
+      --brand2:#00d4ff;
+      --line:rgba(255,255,255,.10);
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 18px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      color:var(--text);
+      background:
+        radial-gradient(1100px 700px at 12% 10%, rgba(124,92,255,.28), transparent 60%),
+        radial-gradient(900px 600px at 86% 15%, rgba(0,212,255,.20), transparent 55%),
+        radial-gradient(1200px 800px at 60% 90%, rgba(124,92,255,.14), transparent 55%),
+        var(--bg);
+      line-height:1.45;
+    }
+    a{color:inherit; text-decoration:none}
+    .container{max-width:1120px; margin:0 auto; padding:0 20px}
+
+    /* Top nav */
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(11,16,32,.62);
+      border-bottom:1px solid var(--line);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      font-weight:700; letter-spacing:.2px;
+    }
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 8px 28px rgba(124,92,255,.35);
+      position:relative;
+      overflow:hidden;
+    }
+    .logo::after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 220deg, rgba(255,255,255,.0), rgba(255,255,255,.55), rgba(255,255,255,.0));
+      animation: spin 5s linear infinite;
+      opacity:.35;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    nav ul{display:flex; gap:18px; list-style:none; margin:0; padding:0}
+    nav a{
+      color:var(--muted);
+      padding:10px 10px;
+      border-radius:12px;
+      transition:.18s ease;
+      font-size:14px;
+    }
+    nav a:hover{color:var(--text); background: rgba(255,255,255,.06)}
+    .cta{
+      display:flex; gap:10px; align-items:center;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color:var(--text);
+      font-weight:600;
+      font-size:14px;
+      cursor:pointer;
+      transition:.18s ease;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:hover{transform: translateY(-1px); background: rgba(255,255,255,.07)}
+    .btn.primary{
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      box-shadow: 0 14px 40px rgba(0,212,255,.18);
+    }
+    .btn.primary:hover{filter:brightness(1.05)}
+    .btn.small{padding:8px 12px; border-radius:12px; font-size:13px}
+
+    /* Hero */
+    .hero{padding:64px 0 22px}
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap:22px;
+      align-items:stretch;
+    }
+    .card{
+      background: rgba(15,23,48,.72);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .hero-main{padding:28px}
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      font-family: var(--mono);
+      font-size:12px;
+      color: var(--muted);
+      border:1px solid var(--line);
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.03);
+    }
+    .dot{
+      width:9px; height:9px; border-radius:99px;
+      background: linear-gradient(135deg, var(--brand2), var(--brand));
+      box-shadow:0 0 0 4px rgba(124,92,255,.15);
+    }
+    h1{
+      margin:16px 0 10px;
+      font-size: clamp(32px, 4vw, 52px);
+      line-height:1.05;
+      letter-spacing:-.6px;
+    }
+    .lead{
+      margin:0 0 18px;
+      color: var(--muted);
+      font-size: 16px;
+      max-width: 62ch;
+    }
+    .pill-row{display:flex; flex-wrap:wrap; gap:10px; margin: 16px 0 22px}
+    .pill{
+      font-size:12px;
+      color: var(--text);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      padding:8px 10px;
+      border-radius:999px;
+    }
+    .hero-actions{display:flex; gap:10px; flex-wrap:wrap}
+
+    /* Side card */
+    .hero-side{padding:18px}
+    .profile{
+      display:flex; gap:14px; align-items:center; padding:14px;
+      border-radius:16px;
+      background: rgba(255,255,255,.03);
+      border:1px solid var(--line);
+    }
+    .avatar{
+      width:54px; height:54px; border-radius:16px;
+      background: linear-gradient(135deg, rgba(124,92,255,.9), rgba(0,212,255,.9));
+      position:relative;
+      overflow:hidden;
+      flex:0 0 auto;
+    }
+    .avatar::before{
+      content:"";
+      position:absolute; inset:-40%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.55), transparent 55%);
+      opacity:.55;
+      transform: rotate(15deg);
+    }
+    .meta .name{font-weight:800}
+    .meta .role{color:var(--muted); font-size:13px; margin-top:2px}
+    .stat-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+      margin-top:12px;
+    }
+    .stat{
+      padding:12px;
+      border-radius:16px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    .stat .num{font-weight:850; font-size:18px}
+    .stat .lbl{color:var(--muted); font-size:12px; margin-top:3px}
+    .side-list{margin-top:12px; padding:14px; border-radius:16px; border:1px solid var(--line); background: rgba(255,255,255,.03)}
+    .side-list h3{margin:0 0 8px; font-size:14px}
+    .side-list ul{margin:0; padding-left:18px; color:var(--muted); font-size:13px}
+    .side-list li{margin:6px 0}
+
+    /* Sections */
+    section{padding:30px 0}
+    .section-title{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
+      margin-bottom:14px;
+    }
+    .section-title h2{margin:0; font-size:20px; letter-spacing:-.2px}
+    .section-title p{margin:0; color:var(--muted); font-size:13px; max-width:70ch}
+
+    .grid-3{display:grid; grid-template-columns: repeat(3, 1fr); gap:14px}
+    .grid-2{display:grid; grid-template-columns: repeat(2, 1fr); gap:14px}
+    .tile{padding:18px}
+    .tile h3{margin:0 0 8px; font-size:15px}
+    .tile p{margin:0; color:var(--muted); font-size:13px}
+    .tag-row{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+    .tag{font-size:12px; padding:6px 8px; border-radius:999px; border:1px solid var(--line); color:var(--muted)}
+    .icon{
+      width:36px; height:36px; border-radius:14px;
+      display:grid; place-items:center;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      margin-bottom:12px;
+      font-family:var(--mono);
+      color:var(--text);
+    }
+
+    /* Projects */
+    .project{position:relative; overflow:hidden}
+    .project .top{
+      display:flex; justify-content:space-between; align-items:flex-start; gap:10px;
+    }
+    .project h3{margin:0; font-size:16px}
+    .project .links{display:flex; gap:8px; flex-wrap:wrap}
+    .project .desc{margin:10px 0 0; color:var(--muted); font-size:13px}
+    .project::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(700px 220px at 20% 0%, rgba(124,92,255,.16), transparent 60%),
+                  radial-gradient(700px 240px at 80% 100%, rgba(0,212,255,.12), transparent 65%);
+      opacity:.9;
+      pointer-events:none;
+    }
+    .project > *{position:relative}
+
+    /* Experience */
+    .timeline{display:grid; gap:12px}
+    .entry{padding:18px}
+    .entry .head{display:flex; justify-content:space-between; gap:14px; flex-wrap:wrap}
+    .entry .where{font-weight:750}
+    .entry .when{color:var(--muted); font-size:13px; font-family:var(--mono)}
+    .entry ul{margin:10px 0 0; padding-left:18px; color:var(--muted); font-size:13px}
+    .entry li{margin:6px 0}
+
+    /* Contact */
+    form{display:grid; gap:10px}
+    .row{display:grid; grid-template-columns: 1fr 1fr; gap:10px}
+    label{font-size:12px; color:var(--muted)}
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color:var(--text);
+      outline:none;
+      font: inherit;
+    }
+    textarea{min-height:120px; resize:vertical}
+    input:focus, textarea:focus{border-color: rgba(0,212,255,.45); box-shadow: 0 0 0 4px rgba(0,212,255,.10)}
+    .form-note{color:var(--muted); font-size:12px; margin:0}
+    footer{
+      padding:26px 0 42px;
+      color: var(--muted);
+      border-top:1px solid var(--line);
+      margin-top:24px;
+    }
+    .footer-grid{display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap}
+    .mono{font-family:var(--mono)}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-grid{grid-template-columns:1fr}
+      .grid-3{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+      nav ul{display:none}
+      .row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="nav">
+        <a class="brand" href="#top" aria-label="Home">
+          <span class="logo" aria-hidden="true"></span>
+          <span>Alex Chen<span style="color:var(--muted); font-weight:600"> · AI Automation</span></span>
+        </a>
+        <nav aria-label="Primary">
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="cta">
+          <button class="btn small" id="copyEmailBtn" type="button" title="Copy email">
+            Copy email
+          </button>
+          <a class="btn primary" href="#contact">Hire me</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="container">
+      <section class="hero">
+        <div class="hero-grid">
+          <div class="card hero-main">
+            <span class="kicker"><span class="dot"></span> Building production AI automation · LLM agents · workflow orchestration</span>
+            <h1>AI developer specializing in <span style="background: linear-gradient(135deg,var(--brand),var(--brand2)); -webkit-background-clip:text; background-clip:text; color:transparent;">automation</span>.</h1>
+            <p class="lead">
+              I design and ship reliable AI systems that remove manual work: agentic workflows, document pipelines,
+              customer support automation, and data integrations—built with measurable ROI, safety, and observability.
+            </p>
+
+            <div class="pill-row" aria-label="Key capabilities">
+              <span class="pill">LLM agents & tools</span>
+              <span class="pill">RAG / search</span>
+              <span class="pill">OCR + documents</span>
+              <span class="pill">Workflow orchestration</span>
+              <span class="pill">APIs + integrations</span>
+              <span class="pill">Monitoring & evals</span>
+            </div>
+
+            <div class="hero-actions">
+              <a class="btn primary" href="#projects">View projects</a>
+              <a class="btn" href="#services">What I do</a>
+              <a class="btn" href="resume.pdf" download>Download resume</a>
+            </div>
+          </div>
+
+          <aside class="card hero-side" aria-label="Profile summary">
+            <div class="profile">
+              <div class="avatar" aria-hidden="true"></div>
+              <div class="meta">
+                <div class="name">Alex Chen</div>
+                <div class="role">AI Automation Developer · Remote / On-site</div>
+              </div>
+            </div>
+
+            <div class="stat-grid" role="list" aria-label="Highlights">
+              <div class="stat" role="listitem">
+                <div class="num">+38%</div>
+                <div class="lbl">avg. cycle-time reduction</div>
+              </div>
+              <div class="stat" role="listitem">
+                <div class="num">99.9%</div>
+                <div class="lbl">pipeline uptime target</div>
+              </div>
+              <div class="stat" role="listitem">
+                <div class="num">5–20x</div>
+                <div class="lbl">throughput on ops tasks</div>
+              </div>
+              <div class="stat" role="listitem">
+                <div class="num">&lt;2w</div>
+                <div class="lbl">to first automation MVP</div>
+              </div>
+            </div>
+
+            <div class="side-list">
+              <h3>Stack</h3>
+              <ul>
+                <li><span class="mono">Python</span>, FastAPI, Celery, TypeScript</li>
+                <li>OpenAI / Anthropic, LangChain/LangGraph</li>
+                <li>Postgres, Redis, vector DBs, Elasticsearch</li>
+                <li>Docker, Kubernetes, Terraform, CI/CD</li>
+                <li>OpenTelemetry, Prometheus/Grafana</li>
+              </ul>
+            </div>
+
+            <div class="side-list">
+              <h3>Focus</h3>
+              <ul>
+                <li>Human-in-the-loop approvals for safety</li>
+                <li>Evaluation harnesses + regression tests</li>
+                <li>Cost controls (caching, routing, batching)</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="services">
+        <div class="section-title">
+          <div>
+            <h2>Services</h2>
+            <p>Automation systems engineered for reliability: versioning, audit logs, rate limits, monitoring, and evals.</p>
+          </div>
+        </div>
+
+        <div class="grid-3">
+          <div class="card tile">
+            <div class="icon">01</div>
+            <h3>LLM-powered workflow automation</h3>
+            <p>Agentic flows that call tools/APIs, enforce guardrails, and produce structured outputs for downstream systems.</p>
+            <div class="tag-row">
+              <span class="tag">Agents</span><span class="tag">Tool calling</span><span class="tag">Approvals</span>
+            </div>
+          </div>
+
+          <div class="card tile">
+            <div class="icon">02</div>
+            <h3>Document processing pipelines</h3>
+            <p>OCR + extraction + validation for invoices, contracts, KYC, and emails—with confidence scoring and exceptions.</p>
+            <div class="tag-row">
+              <span class="tag">OCR</span><span class="tag">Parsing</span><span class="tag">QA queues</span>
+            </div>
+          </div>
+
+          <div class="card tile">
+            <div class="icon">03</div>
+            <h3>RAG & enterprise search</h3>
+            <p>Retrieval augmented generation with permissions, freshness strategies, and evaluation to reduce hallucinations.</p>
+            <div class="tag-row">
+              <span class="tag">RAG</span><span class="tag">Evals</span><span class="tag">Security</span>
+            </div>
+          </div>
+
+          <div class="card tile">
+            <div class="icon">04</div>
+            <h3>Integrations & orchestration</h3>
+            <p>Event-driven automations across CRMs, ticketing, billing, and data warehouses—idempotent and observable.</p>
+            <div class="tag-row">
+              <span class="tag">Webhooks</span><span class="tag">Queues</span><span class="tag">ETL</span>
+            </div>
+          </div>
+
+          <div class="card tile">
+            <div class="icon">05</div>
+            <h3>AI quality: testing & monitoring</h3>
+            <p>Golden sets, scoring rubrics, prompt/version control, and production metrics (latency, cost, accuracy).</p>
+            <div class="tag-row">
+              <span class="tag">Regression</span><span class="tag">Tracing</span><span class="tag">Analytics</span>
+            </div>
+          </div>
+
+          <div class="card tile">
+            <div class="icon">06</div>
+            <h3>Automation strategy</h3>
+            <p>Identify best opportunities, map processes, estimate ROI, and deliver an implementation plan with milestones.</p>
+            <div class="tag-row">
+              <span class="tag">ROI</span><span class="tag">Roadmap</span><span class="tag">Change mgmt</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="section-title">
+          <div>
+            <h2>Featured projects</h2>
+            <p>Representative work. Replace with your real case studies, links, and metrics.</p>
+          </div>
+          <a class="btn small" href="#contact">Request a walkthrough</a>
+        </div>
+
+        <div class="grid-2">
+          <article class="card tile project">
+            <div class="top">
+              <h3>SupportOps Agent for ticket triage & resolution</h3>
+              <div class="links">
+                <a class="btn small" href="#" aria-label="View case study">Case study</a>
+                <a class="btn small" href="#" aria-label="View GitHub">GitHub</a>
+              </div>
+            </div>
+            <p class="desc">
+              An LLM agent that classifies inbound tickets, retrieves relevant docs, drafts responses, and routes to the right team.
+              Includes human approval, PII redaction, and end-to-end tracing.
+            </p>
+            <div class="tag-row">
+              <span class="tag">LangGraph</span><span class="tag">RAG</span><span class="tag">Zendesk</span><span class="tag">OpenTelemetry</span>
+            </div>
+          </article>
+
+          <article class="card tile project">
+            <div class="top">
+              <h3>Invoice automation pipeline (OCR → ERP)</h3>
+              <div class="links">
+                <a class="btn small" href="#" aria-label="View case study">Case study</a>
+                <a class="btn small" href="#" aria-label="View demo">Demo</a>
+              </div>
+            </div>
+            <p class="desc">
+              Robust invoice ingestion with OCR, line-item extraction, vendor matching, confidence scoring, and exception handling.
+              Reduced manual entry and improved auditability.
+            </p>
+            <div class="tag-row">
+              <span class="tag">OCR</span><span class="tag">FastAPI</span><span class="tag">Postgres</span><span class="tag">Queues</span>
+            </div>
+          </article>
+
+          <article class="card tile project">
+            <div class="top">
+              <h3>Sales enablement search (permissioned RAG)</h3>
+              <div class="links">
+                <a class="btn small" href="#" aria-label="View case study">Case study</a>
+                <a class="btn small" href="#" aria-label="Architecture">Architecture</a>
+              </div>
+            </div>
+            <p class="desc">
+              Unified search across Drive/Confluence/Notion with ACL-aware retrieval and freshness-based re-indexing.
+              Includes evaluation harness to track answer quality over time.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Vector DB</span><span class="tag">ACLs</span><span class="tag">Evals</span><span class="tag">Caching</span>
+            </div>
+          </article>
+
+          <article class="card tile project">
+            <div class="top">
+              <h3>Automation control plane</h3>
+              <div class="links">
+                <a class="btn small" href="#" aria-label="View case study">Case study</a>
+                <a class="btn small" href="#" aria-label="Docs">Docs</a>
+              </div>
+            </div>
+            <p class="desc">
+              Centralized orchestration for automations: schedules, webhooks, retries, idempotency keys, audit logs,
+              rate limits, secrets, and dashboards for cost/latency.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Celery</span><span class="tag">Redis</span><span class="tag">Kubernetes</span><span class="tag">Observability</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="section-title">
+          <div>
+            <h2>Experience</h2>
+            <p>Examples of roles and impact statements. Swap in your real companies and results.</p>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <div class="card entry">
+            <div class="head">
+              <div class="where">Senior AI Automation Engineer · NexusOps</div>
+              <div class="when">2023 — Present</div>
+            </div>
+            <ul>
+              <li>Built LLM agent workflows for ops + support with guardrails, evals, and tracing.</li>
+              <li>Implemented event-driven pipelines (queues, retries, idempotency) to reduce failures and rework.</li>
+              <li>Established prompt/version control and release process (staging, canaries, rollbacks).</li>
+            </ul>
+          </div>
+
+          <div class="card entry">
+            <div class="head">
+              <div class="where">ML Engineer · Atlas Automation</div>
+              <div class="when">2020 — 2023</div>
+            </div>
+            <ul>
+              <li>Deployed document extraction services and monitoring to catch drift and OCR regressions.</li>
+              <li>Optimized inference cost with caching, routing, and batching; improved latency SLOs.</li>
+              <li>Partnered with stakeholders to prioritize automations by ROI and implementation risk.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact">
+        <div class="section-title">
+          <div>
+            <h2>Contact</h2>
+            <p>Tell me what you want to automate, what systems you use, and your success criteria. I’ll reply with a plan.</p>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="card tile">
+            <h3 style="margin-top:0">Send a message</h3>
+            <form id="contactForm">
+              <div class="row">
+                <div>
+                  <label for="name">Name</label>
+                  <input id="name" name="name" autocomplete="name" placeholder="Your name" required />
+                </div>
+                <div>
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" autocomplete="email" placeholder="you@company.com" required />
+                </div>
+              </div>
+              <div>
+                <label for="topic">What are you trying to automate?</label>
+                <input id="topic" name="topic" placeholder="e.g., invoice processing, ticket triage, reporting..." required />
+              </div>
+              <div>
+                <label for="message">Details</label>
+                <textarea id="message" name="message" placeholder="Systems involved, volume, constraints, timeline, and desired outcome..." required></textarea>
+              </div>
+              <button class="btn primary" type="submit">Generate email</button>
+              <p class="form-note">This form opens your email client (no backend required).</p>
+            </form>
+          </div>
+
+          <div class="card tile">
+            <h3 style="margin-top:0">Direct</h3>
+            <p style="color:var(--muted); font-size:13px; margin-top:0">
+              Prefer email or a quick call? Use the links below.
+            </p>
+
+            <div class="tag-row" style="margin-top:10px">
+              <span class="tag"><span class="mono">Email:</span> <span id="emailText">alex@example.com</span></span>
+              <span class="tag"><span class="mono">Location:</span> Remote / SF Bay</span>
+              <span class="tag"><span class="mono">Availability:</span> Contract · Full-time</span>
+            </div>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:14px">
+              <a class="btn" href="#" id="mailLink">Email me</a>
+              <a class="btn" href="#" id="linkedinLink">LinkedIn</a>
+              <a class="btn" href="#" id="githubLink">GitHub</a>
+              <a class="btn" href="#" id="calendarLink">Book a call</a>
+            </div>
+
+            <div class="side-list" style="margin-top:14px">
+              <h3>What to include</h3>
+              <ul>
+                <li>Process description + current pain points</li>
+                <li>Tools (CRM, ticketing, ERP, data warehouse)</li>
+                <li>Data sensitivity (PII/PHI), compliance needs</li>
+                <li>Target metrics (time saved, error rate, cost)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="container" style="padding:0">
+          <div class="footer-grid">
+            <div>© <span id="year"></span> Alex Chen · AI Automation Portfolio</div>
+            <div class="mono">Built with HTML/CSS/JS · Fast to deploy</div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </main>
+
+  <script>
+    // ------- Customize these -------
+    const PROFILE = {
+      name: "Alex Chen",
+      email: "alex@example.com",
+      linkedin: "https://www.linkedin.com/in/your-handle",
+      github: "https://github.com/your-handle",
+      calendar: "https://cal.com/your-handle/intro"
+    };
+    // -------------------------------
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("emailText").textContent = PROFILE.email;
+
+    const mailLink = document.getElementById("mailLink");
+    const linkedinLink = document.getElementById("linkedinLink");
+    const githubLink = document.getElementById("githubLink");
+    const calendarLink = document.getElementById("calendarLink");
+
+    mailLink.href = `mailto:${encodeURIComponent(PROFILE.email)}`;
+    linkedinLink.href = PROFILE.linkedin;
+    githubLink.href = PROFILE.github;
+    calendarLink.href = PROFILE.calendar;
+
+    // Copy email button
+    document.getElementById("copyEmailBtn").addEventListener("click", async () => {
+      try{
+        await navigator.clipboard.writeText(PROFILE.email);
+        const btn = document.getElementById("copyEmailBtn");
+        const prev = btn.textContent;
+        btn.textContent = "Copied!";
+        setTimeout(()=> btn.textContent = prev, 1200);
+      }catch(e){
+        window.location.href = `mailto:${encodeURIComponent(PROFILE.email)}`;
+      }
+    });
+
+    // Contact form: open mail client with prefilled subject/body
+    document.getElementById("contactForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const topic = document.getElementById("topic").value.trim();
+      const msg = document.getElementById("message").value.trim();
+
+      const subject = `Automation inquiry: ${topic}`;
+      const body = [
+        `Name: ${name}`,
+        `Email: ${email}`,
+        ``,
+        `What I want to automate:`,
+        `${topic}`,
+        ``,
+        `Details:`,
+        `${msg}`,
+        ``,
+        `— Sent from portfolio site`
+      ].join("\n");
+
+      const href = `mailto:${encodeURIComponent(PROFILE.email)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = href;
+    });
+  </script>
+</body>
+</html>
+```
